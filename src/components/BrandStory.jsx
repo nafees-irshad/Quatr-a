@@ -10,7 +10,7 @@ const BrandStory = () => {
   return (
     <section
       id="story"
-      className="relative isolate overflow-hidden border-t border-white/10 bg-[#060606] text-[#f5f2ec]"
+      className="relative isolate px-2 overflow-hidden border-t border-white/10 bg-[#060606] text-[#f5f2ec]"
       aria-labelledby="story-title"
     >
       {/* Image keeps its real shape (no zoom/crop). It is vertically centered on the right,

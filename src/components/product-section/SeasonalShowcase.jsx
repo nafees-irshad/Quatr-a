@@ -41,7 +41,7 @@ const SeasonalShowcase = () => {
   return (
     <section
       id="seasons"
-      className="relative isolate min-h-[780px] overflow-hidden border-t border-white/10 bg-[radial-gradient(ellipse_50%_70%_at_50%_50%,rgba(176,135,67,0.14),transparent_72%),linear-gradient(180deg,#0b0b0a_0%,#060606_100%)] text-[#f5f2ec] max-[900px]:min-h-[900px]"
+      className="relative isolate h-[620px] overflow-hidden border-t border-white/10 bg-[radial-gradient(ellipse_50%_70%_at_50%_50%,rgba(176,135,67,0.14),transparent_72%),linear-gradient(180deg,#0b0b0a_0%,#060606_100%)] text-[#f5f2ec] max-[900px]:h-auto max-[900px]:min-h-[900px]"
       aria-label="Seasonal fragrances"
     >
       {/* Local keyframes for the text fade */}
@@ -70,12 +70,8 @@ const SeasonalShowcase = () => {
             const { videoWidth: w, videoHeight: h } = e.currentTarget;
             if (w && h) setRatios((r) => ({ ...r, [i]: w / h }));
           }}
-          style={
-            ratios[i]
-              ? { width: `${ratios[i] * 100}vh`, height: "100%" }
-              : { height: "100%", width: "auto" }
-          }
-          className={`absolute inset-y-0 left-1/2 -z-20 max-w-none -translate-x-1/2 object-cover transition-opacity duration-700 ease-in-out [-webkit-mask-image:linear-gradient(90deg,transparent_0%,#000_20%,#000_80%,transparent_100%)] [mask-image:linear-gradient(90deg,transparent_0%,#000_20%,#000_80%,transparent_100%)] max-[900px]:inset-x-0 max-[900px]:bottom-auto max-[900px]:left-0 max-[900px]:h-[400px] max-[900px]:w-full max-[900px]:translate-x-0 max-[900px]:[-webkit-mask-image:linear-gradient(180deg,#000_55%,transparent_100%)] max-[900px]:[mask-image:linear-gradient(180deg,#000_55%,transparent_100%)] ${
+          style={{ aspectRatio: ratios[i] || 16 / 9 }}
+          className={`absolute inset-y-0 left-1/2 -z-20 h-full w-auto max-w-none -translate-x-1/2 object-cover transition-opacity duration-700 ease-in-out [-webkit-mask-image:linear-gradient(90deg,transparent_0%,#000_22%,#000_78%,transparent_100%)] [mask-image:linear-gradient(90deg,transparent_0%,#000_22%,#000_78%,transparent_100%)] max-[900px]:inset-x-0 max-[900px]:bottom-auto max-[900px]:left-0 max-[900px]:h-[400px] max-[900px]:w-full max-[900px]:translate-x-0 max-[900px]:[-webkit-mask-image:linear-gradient(180deg,#000_55%,transparent_100%)] max-[900px]:[mask-image:linear-gradient(180deg,#000_55%,transparent_100%)] ${
             i === activeIndex ? "opacity-100" : "opacity-0"
           }`}
         />

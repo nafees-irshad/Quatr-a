@@ -1,7 +1,6 @@
 import { useState } from "react";
 
-const videoSrc =
-  "https://ik.imagekit.io/jk9e7l2uo/watermark-removed%20(1).mp4";
+const videoSrc = "https://ik.imagekit.io/jk9e7l2uo/watermark-removed%20(1).mp4";
 
 const MoreThanPerfume = () => {
   // Real width/height of the video, read once it loads, so it is never stretched or cropped
@@ -10,7 +9,7 @@ const MoreThanPerfume = () => {
   return (
     <section
       id="more-than-perfume"
-      className="relative isolate min-h-[780px] overflow-hidden border-t border-white/10 bg-[radial-gradient(ellipse_50%_70%_at_50%_55%,rgba(176,135,67,0.14),transparent_72%),linear-gradient(180deg,#0b0b0a_0%,#060606_100%)] text-[#f5f2ec] max-[900px]:min-h-0"
+      className="relative px-2 isolate h-[620px] overflow-hidden border-t border-white/10 bg-[radial-gradient(ellipse_50%_70%_at_50%_55%,rgba(176,135,67,0.14),transparent_72%),linear-gradient(180deg,#0b0b0a_0%,#060606_100%)] text-[#f5f2ec] max-[900px]:h-auto max-[900px]:min-h-0"
       aria-labelledby="more-title"
     >
       {/* Video: centered, natural shape, edges fade into the dark background */}
@@ -27,20 +26,16 @@ const MoreThanPerfume = () => {
           if (w && h) setRatio(`${w} / ${h}`);
         }}
         style={{ aspectRatio: ratio }}
-        className="absolute inset-y-0 left-1/2 -z-20 h-full max-w-none -translate-x-1/2 object-contain [-webkit-mask-image:linear-gradient(90deg,transparent_0%,#000_18%,#000_82%,transparent_100%)] [mask-image:linear-gradient(90deg,transparent_0%,#000_18%,#000_82%,transparent_100%)] max-[900px]:inset-x-0 max-[900px]:bottom-auto max-[900px]:left-0 max-[900px]:h-[380px] max-[900px]:w-full max-[900px]:translate-x-0 max-[900px]:object-cover max-[900px]:[-webkit-mask-image:linear-gradient(180deg,#000_55%,transparent_100%)] max-[900px]:[mask-image:linear-gradient(180deg,#000_55%,transparent_100%)]"
+        className="absolute inset-y-0 left-1/2 -z-20 h-full w-auto max-w-none -translate-x-1/2 object-cover [-webkit-mask-image:linear-gradient(90deg,transparent_0%,#000_22%,#000_78%,transparent_100%)] [mask-image:linear-gradient(90deg,transparent_0%,#000_22%,#000_78%,transparent_100%)] max-[900px]:inset-x-0 max-[900px]:bottom-auto max-[900px]:left-0 max-[900px]:h-[380px] max-[900px]:w-full max-[900px]:translate-x-0 max-[900px]:[-webkit-mask-image:linear-gradient(180deg,#000_55%,transparent_100%)] max-[900px]:[mask-image:linear-gradient(180deg,#000_55%,transparent_100%)]"
       />
 
       {/* Shading behind the text */}
       <div
-        className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(6,6,6,0.8)_0%,rgba(6,6,6,0.4)_30%,transparent_48%)] max-[900px]:bg-none"
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-28 bg-gradient-to-b from-[#090909] via-[#090909]/60 to-transparent"
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-28 bg-gradient-to-b from-[#090909] to-transparent"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-28 bg-gradient-to-t from-[#060606] to-transparent"
+        className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-28 bg-gradient-to-t from-[#060606] via-[#060606]/60 to-transparent"
         aria-hidden="true"
       />
 
@@ -63,8 +58,8 @@ const MoreThanPerfume = () => {
           <p className="mb-8 text-[16px] leading-[1.75] text-[rgba(245,242,236,0.85)] drop-shadow-[0_1px_8px_rgba(0,0,0,0.7)]">
             A Quatréa fragrance is a presence, not just a scent. Crafted from
             rare botanical essences, it defines your elegance, lifts your
-            confidence, and leaves a lasting impression long after you have
-            left the room.
+            confidence, and leaves a lasting impression long after you have left
+            the room.
           </p>
 
           <a

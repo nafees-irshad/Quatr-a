@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, ShoppingBag, Heart } from "lucide-react";
+import { ChevronLeft, ChevronRight, ShoppingBag } from "lucide-react";
 import { useCart } from "../context/CartContext";
+import { useNavigate } from "react-router-dom";
 
 const products = [
   {
@@ -53,8 +54,8 @@ const slideCount = slides.length;
 
 const ProductsCollection = () => {
   const [activeIndex, setActiveIndex] = useState(1);
-  const [wishlisted, setWishlisted] = useState({});
-  const { addToCart } = useCart();
+  const { addToCart, buyNow } = useCart();
+  const navigate = useNavigate();
 
   const prev = () => setActiveIndex((i) => (i - 1 + slideCount) % slideCount);
   const next = () => setActiveIndex((i) => (i + 1) % slideCount);
@@ -67,13 +68,15 @@ const ProductsCollection = () => {
       return (i + delta + slideCount) % slideCount;
     });
 
-  const toggleWishlist = (id) => setWishlisted((w) => ({ ...w, [id]: !w[id] }));
-
   // Circular offset: -1 = left, 0 = center, 1 = right, others = waiting off-screen
   const getOffset = (i) => {
     let d = (i - activeIndex + slideCount) % slideCount;
     if (d >= slideCount / 2) d -= slideCount;
     return d;
+  };
+  const handleShopNow = (product) => {
+    buyNow({ ...product, size: "50ml" });
+    navigate("/checkout");
   };
 
   return (
@@ -156,43 +159,24 @@ const ProductsCollection = () => {
                     </span>
                   )}
 
-                  {/* Wishlist icon, top-left, slides down on hover */}
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      toggleWishlist(product.id);
-                    }}
-                    className="absolute left-3 top-3 z-20 grid h-9 w-9 -translate-y-2 cursor-pointer place-items-center rounded-full border border-white/20 bg-black/55 text-white/80 opacity-0 backdrop-blur-sm transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 hover:border-[#d7c49c] hover:text-[#d7c49c]"
-                    aria-label={`${wishlisted[product.id] ? "Remove from" : "Add to"} wishlist`}
-                  >
-                    <Heart
-                      size={15}
-                      aria-hidden="true"
-                      className={
-                        wishlisted[product.id]
-                          ? "fill-[#d7c49c] text-[#d7c49c]"
-                          : ""
-                      }
-                    />
-                  </button>
-
                   {/* Cart icon, below badge, slides down on hover */}
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      addToCart({
-                        ...product,
-                        size: "50ml",
-                        image: product.image,
-                      });
-                    }}
-                    className="absolute right-3 top-14 z-20 grid h-9 w-9 -translate-y-2 cursor-pointer place-items-center rounded-full border border-white/20 bg-black/55 text-white/80 opacity-0 backdrop-blur-sm transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 hover:border-[#d7c49c] hover:text-[#d7c49c]"
-                    aria-label={`Add ${product.name} to cart`}
-                  >
-                    <ShoppingBag size={15} aria-hidden="true" />
-                  </button>
+                  {isCenter && (
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        addToCart({
+                          ...product,
+                          size: "50ml",
+                          image: product.image,
+                        });
+                      }}
+                      className="absolute left-3 top-3 z-20 grid h-9 w-9 -translate-y-2 cursor-pointer place-items-center rounded-full border border-white/20 bg-black/55 text-white/80 opacity-0 backdrop-blur-sm transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 hover:border-[#d7c49c] hover:text-[#d7c49c]"
+                      aria-label={`Add ${product.name} to cart`}
+                    >
+                      <ShoppingBag size={15} aria-hidden="true" />
+                    </button>
+                  )}
 
                   {/* Name + price overlay at bottom */}
                   <div className="absolute inset-x-0 bottom-0 z-10 px-4 pb-4 pt-10">
@@ -202,6 +186,20 @@ const ProductsCollection = () => {
                     <p className="mt-0.5 text-base font-semibold tracking-wide text-[#d7c49c] drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
                       ${product.price.toFixed(2)}
                     </p>
+
+                    {/* Shop Now: center card only */}
+                    {isCenter && (
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleShopNow(product);
+                        }}
+                        className="mt-3 inline-flex min-h-11 w-full cursor-pointer items-center justify-center gap-3 rounded-full border border-[#d7c49c] bg-[#d7c49c] text-[13px] font-semibold uppercase tracking-[0.12em] text-[#090909] transition-colors duration-200 hover:bg-black/40 hover:text-[#d7c49c]"
+                      >
+                        Shop Now <span aria-hidden="true">→</span>
+                      </button>
+                    )}
                   </div>
                 </div>
               </article>

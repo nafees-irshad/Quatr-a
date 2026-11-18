@@ -111,3 +111,43 @@ body {
     background: var(--code-bg);
   }
 }
+
+/* ───────── Luxury gold scrollbar ───────── */
+
+/* Chrome, Edge, Safari: custom scrollbar, no arrows */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a09;
+  border-left: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #e6cf94 0%, #c9a84c 50%, #8a6a2f 100%);
+  border-radius: 999px;
+  border: 2px solid #0a0a09;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #f1dca6 0%, #d7b45a 50%, #a07840 100%);
+}
+
+/* Remove the top and bottom arrows */
+::-webkit-scrollbar-button,
+::-webkit-scrollbar-button:single-button,
+::-webkit-scrollbar-button:vertical:decrement,
+::-webkit-scrollbar-button:vertical:increment {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Firefox only (browsers without webkit scrollbar support) */
+@supports not selector(::-webkit-scrollbar) {
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: #b8975a #0a0a09;
+  }
+}
